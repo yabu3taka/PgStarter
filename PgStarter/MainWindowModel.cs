@@ -13,7 +13,7 @@ using System.Windows.Threading;
 using System.Windows.Input;
 
 using Microsoft.Win32;
-using Microsoft.WindowsAPICodePack.Dialogs;
+using Forms = System.Windows.Forms;
 
 namespace PgStarter
 {
@@ -270,16 +270,15 @@ namespace PgStarter
 
         private void SelectProgramFolder()
         {
-            using var cofd = new CommonOpenFileDialog()
+            var cofd = new Forms.FolderBrowserDialog()
             {
-                Title = "フォルダを選択",
+                Description = "フォルダを選択",
                 InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal),
-                IsFolderPicker = true,
             };
 
-            if (cofd.ShowDialog() == CommonFileDialogResult.Ok)
+            if (cofd.ShowDialog() == Forms.DialogResult.OK)
             {
-                MyDocPath = cofd.FileName;
+                MyDocPath = cofd.SelectedPath;
             }
         }
 
